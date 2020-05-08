@@ -1,6 +1,8 @@
 <template>
   <div
-    :class="toggle ? 'main-menu open' : 'main-menu'"
+    :class="
+      toggle ? 'main-menu open hidden-xs-only' : 'main-menu hidden-xs-only'
+    "
     @mouseenter="toggle = true"
     @mouseleave="toggle = false"
   >
