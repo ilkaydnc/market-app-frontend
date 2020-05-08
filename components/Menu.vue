@@ -103,6 +103,11 @@ export default {
         title: 'Yardım',
         link: 'help',
       },
+      {
+        icon: 'el-icon-download',
+        title: 'Çıkış Yap',
+        link: 'signin',
+      },
     ],
   }),
   methods: {
@@ -216,5 +221,9 @@ export default {
 .menu-header .menu-item div {
   width: 48px;
   height: 48px;
+}
+
+.bottom-menu-container a:last-child li i {
+  transform: rotate(90deg);
 }
 </style>
