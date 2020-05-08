@@ -1,15 +1,15 @@
 <template>
   <div class="app-wrapper">
-    <Header />
+    <Menu />
     <nuxt />
   </div>
 </template>
 
 <script>
-import Header from '../components/Menu'
+import Menu from '../components/Menu'
 export default {
   components: {
-    Header,
+    Menu,
   },
 }
 </script>
