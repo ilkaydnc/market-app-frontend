@@ -43,9 +43,7 @@
         <li class="menu-item">
           <i :class="item.icon"></i>
           <transition name="fade">
-            <span v-if="toggle" style="whitespace: nowrap;">{{
-              item.title
-            }}</span>
+            <span v-if="toggle">{{ item.title }}</span>
           </transition>
         </li>
       </nuxt-link>
@@ -215,7 +213,7 @@ export default {
 }
 
 .nuxt-link-exact-active .menu-item {
-  background-color: white !important;
+  background-color: var(--extra-light-border-color) !important;
   color: var(--regular-text-color);
   transition: 0.4s;
 }

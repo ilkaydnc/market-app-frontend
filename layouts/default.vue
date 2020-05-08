@@ -33,7 +33,7 @@ export default {
 
 html {
   font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-    'Helvetica Neue', Arial, sans-serif;
+    'Helvetica Neue', Arial, sans-serif !important;
   font-size: 16px;
   word-spacing: 1px;
   -ms-text-size-adjust: 100%;
@@ -41,6 +41,15 @@ html {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   box-sizing: border-box;
+  overflow: hidden;
+  background-color: var(--extra-light-border-color);
+}
+
+button {
+  font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, sans-serif !important;
+  font-weight: 300 !important;
+  font-size: 16px !important;
 }
 
 *,
@@ -60,4 +69,23 @@ html {
   min-height: 100vh;
   max-width: 100vw;
 }
+
+.container {
+  flex: 1;
+  padding: 10px;
+}
+
+/* TODO: DELETE AFTER DEVELOPMENT */
+
+.bg-purple-dark {
+  background: #99a9bf;
+}
+.bg-purple {
+  background: #d3dce6;
+}
+.bg-purple-light {
+  background: #e5e9f2;
+}
+
+/* ------------------------------ */
 </style>
