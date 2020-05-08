@@ -212,4 +212,9 @@ export default {
   color: var(--regular-text-color);
   transition: 0.4s;
 }
+
+.menu-header .menu-item div {
+  width: 48px;
+  height: 48px;
+}
 </style>
