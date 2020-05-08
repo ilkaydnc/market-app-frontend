@@ -103,11 +103,6 @@ export default {
         title: 'Yardım',
         link: 'help',
       },
-      {
-        icon: 'el-icon-download',
-        title: 'Çıkış Yap',
-        link: 'signin',
-      },
     ],
   }),
   methods: {
@@ -216,9 +211,5 @@ export default {
   background-color: white !important;
   color: var(--regular-text-color);
   transition: 0.4s;
-}
-
-.bottom-menu-container a:last-child li i {
-  transform: rotate(90deg);
 }
 </style>
