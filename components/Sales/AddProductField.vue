@@ -14,13 +14,13 @@
     <div class="sales-barcode-buttons">
       <div class="sales-barcode-button">
         <el-button type="success" icon="el-icon-search">
-          <span class="sales-barcode-button-content">Ürün Ara</span></el-button
-        >
+          <span class="sales-barcode-button-content">Ürün Ara</span>
+        </el-button>
       </div>
       <div class="sales-barcode-button">
         <el-button type="primary" icon="el-icon-view">
-          <span class="sales-barcode-button-content">Fiyat Gör</span></el-button
-        >
+          <span class="sales-barcode-button-content">Fiyat Gör</span>
+        </el-button>
       </div>
       <!-- <div class="sales-barcode-button">
                 <el-button type="warning" icon="el-icon-printer">
@@ -28,7 +28,7 @@
                     >Fişi Yazdır</span
                   ></el-button
                 >
-              </div> -->
+      </div>-->
     </div>
   </div>
 </template>
@@ -39,14 +39,13 @@ export default {
   }),
 }
 </script>
-<style>
+<style scoped>
 .el-input--large input::-webkit-outer-spin-button,
 .el-input--large input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
 
-/* Firefox */
 .el-input--large input[type='number'] {
   -moz-appearance: textfield;
 }

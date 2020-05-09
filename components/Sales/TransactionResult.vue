@@ -29,14 +29,13 @@
           type="number"
         />
       </el-col>
-      <el-col class=" hidden-sm-and-down" :span="3">
+      <el-col class="hidden-sm-and-down" :span="3">
         <el-button
           class="transaction-result-clear-button"
           type="danger"
           icon="el-icon-refresh-left"
           @click="paidValue = 0"
-        >
-        </el-button>
+        ></el-button>
       </el-col>
     </el-row>
     <el-row class="transaction-result-amount-button-container" :gutter="10">
@@ -45,9 +44,8 @@
           class="transaction-result-amount-button"
           type="primary"
           @click="paidValue = Number(paidValue) + amount"
+          >{{ amount }}</el-button
         >
-          {{ amount }}
-        </el-button>
       </el-col>
     </el-row>
     <el-row class="transaction-result-button-container" :gutter="10">
@@ -56,9 +54,8 @@
           class="transaction-result-button"
           :type="result.type"
           @click="result.submit"
+          >{{ result.title }}</el-button
         >
-          {{ result.title }}
-        </el-button>
       </el-col>
     </el-row>
   </div>
@@ -105,7 +102,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .transaction-result-inputs input {
   text-align: center;
 }

@@ -16,8 +16,8 @@
 <script>
 import 'element-ui/lib/theme-chalk/display.css'
 
-import AddProductField from './AddProductField'
-import TransactionResult from './TransactionResult'
+import AddProductField from '@/components/Sales/AddProductField'
+import TransactionResult from '@/components/Sales/TransactionResult'
 
 export default {
   components: {
