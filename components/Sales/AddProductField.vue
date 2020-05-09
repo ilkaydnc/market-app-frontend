@@ -22,13 +22,13 @@
           <span class="sales-barcode-button-content">Fiyat Gör</span>
         </el-button>
       </div>
-      <!-- <div class="sales-barcode-button">
-                <el-button type="warning" icon="el-icon-printer">
-                  <span class="sales-barcode-button-content"
-                    >Fişi Yazdır</span
-                  ></el-button
-                >
-      </div>-->
+      <div class="sales-barcode-button">
+        <el-button type="warning" icon="el-icon-printer">
+          <span class="sales-barcode-button-content"
+            >Fişi Yazdır</span
+          ></el-button
+        >
+      </div>
     </div>
   </div>
 </template>
@@ -39,17 +39,7 @@ export default {
   }),
 }
 </script>
-<style scoped>
-.el-input--large input::-webkit-outer-spin-button,
-.el-input--large input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-.el-input--large input[type='number'] {
-  -moz-appearance: textfield;
-}
-
+<style>
 .sales-barcode {
   display: flex;
   flex-direction: column;
@@ -80,16 +70,10 @@ export default {
   height: 64px;
 }
 
-.el-input--large {
-  font-size: 22px;
-}
-
-.el-input--large input {
-  height: 64px;
-  line-height: 64px;
-}
-
 @media (min-width: 768px) {
+}
+
+@media (min-width: 992px) {
   .sales-barcode {
     flex-direction: row;
   }
@@ -101,9 +85,6 @@ export default {
   .sales-barcode-button {
     margin-left: 10px;
   }
-}
-
-@media (min-width: 992px) {
 }
 
 @media (min-width: 1200px) {
