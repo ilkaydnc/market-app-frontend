@@ -63,6 +63,7 @@ button {
 }
 
 .app-wrapper {
+  position: relative;
   display: flex;
   flex-direction: row;
   width: 100%;
@@ -75,17 +76,18 @@ button {
   padding: 10px;
 }
 
-/* TODO: DELETE AFTER DEVELOPMENT */
-
-.bg-purple-dark {
-  background: #99a9bf;
-}
-.bg-purple {
-  background: #d3dce6;
-}
-.bg-purple-light {
-  background: #e5e9f2;
+@media (min-width: 768px) {
+  .container {
+    margin-left: 64px !important;
+  }
 }
 
-/* ------------------------------ */
+@media (min-width: 992px) {
+}
+
+@media (min-width: 1200px) {
+}
+
+@media (min-width: 1920px) {
+}
 </style>
