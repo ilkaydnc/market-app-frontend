@@ -25,6 +25,7 @@
         v-for="(item, index) in menu_1"
         :key="index"
         :to="'/' + item.link"
+        @click="toggle = false"
       >
         <li class="menu-item">
           <i :class="item.icon"></i>
@@ -120,7 +121,9 @@ export default {
 
 <style>
 .main-menu {
-  position: relative;
+  position: absolute;
+  top: 0;
+  left: 0;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -130,10 +133,12 @@ export default {
   background-color: var(--primary-color);
   transition: width 0.4s cubic-bezier(0.22, 0.61, 0.36, 1);
   overflow: hidden;
+  z-index: 10;
 }
 
 .open {
   width: 224px;
+  box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.3);
   transition: width 0.4s cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
@@ -185,6 +190,12 @@ export default {
   background-color: rgba(255, 255, 255, 0.2);
   cursor: pointer;
   transition: 0.3s;
+}
+
+.menu-item:active {
+  background-color: #3992eb;
+  cursor: pointer;
+  transition: 0.1s;
 }
 
 .menu-item i {
