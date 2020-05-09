@@ -7,7 +7,6 @@
   "useTabs": false,
   "quoteProps": "preserve",
   "bracketSpacing": true,
-  "jsxBracketSameLine": false,
   "arrowParens": "always",
   "htmlWhitespaceSensitivity": "strict"
 }
