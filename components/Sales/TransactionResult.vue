@@ -3,28 +3,28 @@
     <el-row class="transaction-result-inputs" :gutter="10">
       <el-col :xs="8" :sm="8" :md="7">
         <el-input
-          v-model="paidValue"
+          :value="paidValue"
           class="el-input--large"
-          placeholder="Ödenen"
+          placeholder=""
+          min="0"
+          type="number"
+          @input="setPaidValue"
+        />
+      </el-col>
+      <el-col :xs="8" :sm="8" :md="7">
+        <el-input
+          :value="totalValue"
+          class="el-input--large"
+          placeholder=""
           min="0"
           type="number"
         />
       </el-col>
       <el-col :xs="8" :sm="8" :md="7">
         <el-input
-          v-model="totalValue"
+          :value="remainingValue"
           class="el-input--large"
-          placeholder="Toplam"
-          min="0"
-          type="number"
-          :disabled="true"
-        />
-      </el-col>
-      <el-col :xs="8" :sm="8" :md="7">
-        <el-input
-          v-model="remainingValue"
-          class="el-input--large"
-          placeholder="Kalan"
+          placeholder=""
           min="0"
           type="number"
         />
@@ -34,7 +34,7 @@
           class="transaction-result-clear-button"
           type="danger"
           icon="el-icon-refresh-left"
-          @click="paidValue = 0"
+          @click="clear"
         ></el-button>
       </el-col>
     </el-row>
@@ -43,7 +43,7 @@
         <el-button
           class="transaction-result-amount-button"
           type="primary"
-          @click="paidValue = Number(paidValue) + amount"
+          @click="increase(amount)"
           >{{ amount }}</el-button
         >
       </el-col>
@@ -62,11 +62,10 @@
 </template>
 
 <script>
+import { mapState, mapMutations } from 'vuex'
+
 export default {
   data: () => ({
-    paidValue: 0,
-    totalValue: '',
-    remainingValue: '',
     amountValues: [5, 10, 20, 50, 100, 200],
     resultButtons: [
       {
@@ -92,19 +91,34 @@ export default {
       },
       {
         title: 'Parçalı',
-        type: 'info',
+        type: 'danger',
         submit: () => {
           // code here
         },
       },
     ],
   }),
+  computed: {
+    ...mapState({
+      paidValue: (state) => state.sales.paidValue,
+      totalValue: (state) => state.sales.totalValue,
+      remainingValue: (state) => state.sales.remainingValue,
+    }),
+  },
+  methods: {
+    ...mapMutations({
+      increase: 'sales/INCREASE_PAID_VALUE',
+      setPaidValue: 'sales/SET_PAID_VALUE',
+      clear: 'sales/CLEAR_VALUE',
+    }),
+  },
 }
 </script>
 
-<style scoped>
+<style>
 .transaction-result-inputs input {
   text-align: center;
+  font-size: 32px;
 }
 
 .transaction-result-amount-button-container {
@@ -135,5 +149,6 @@ export default {
   width: 100%;
   text-align: center;
   padding: 10px 0;
+  font-size: 24px !important;
 }
 </style>
