@@ -8,7 +8,6 @@
         min="0"
         type="number"
       >
-        <el-button slot="append" icon="el-icon-plus"></el-button>
       </el-input>
     </div>
     <div class="sales-barcode-buttons">
@@ -22,13 +21,13 @@
           <span class="sales-barcode-button-content">Fiyat Gör</span>
         </el-button>
       </div>
-      <div class="sales-barcode-button">
+      <!-- <div class="sales-barcode-button">
         <el-button type="warning" icon="el-icon-printer">
           <span class="sales-barcode-button-content"
             >Fişi Yazdır</span
           ></el-button
         >
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
