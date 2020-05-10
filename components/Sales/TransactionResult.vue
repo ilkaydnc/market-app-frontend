@@ -2,18 +2,23 @@
   <div class="transaction-result">
     <el-row class="transaction-result-inputs" :gutter="10">
       <el-col :xs="8" :sm="8" :md="7">
+        <label class="transaction-result-label" for="paid">Ödenen</label>
         <el-input
-          :value="paidValue"
+          id="paid"
+          :value="paid"
           class="el-input--large"
           placeholder=""
           min="0"
           type="number"
-          @input="setPaidValue"
-        />
+          @input="setPaid"
+        >
+        </el-input>
       </el-col>
       <el-col :xs="8" :sm="8" :md="7">
+        <label class="transaction-result-label" for="total">Tutar</label>
         <el-input
-          :value="totalValue"
+          id="total"
+          :value="total"
           class="el-input--large"
           placeholder=""
           min="0"
@@ -21,20 +26,26 @@
         />
       </el-col>
       <el-col :xs="8" :sm="8" :md="7">
+        <label class="transaction-result-label" for="remaining">Kalan</label>
         <el-input
-          :value="remainingValue"
-          class="el-input--large"
+          id="remaining"
+          :value="remaining"
+          :class="`el-input--large ${setRemainingColor()}`"
           placeholder=""
           min="0"
           type="number"
         />
       </el-col>
       <el-col class="hidden-sm-and-down" :span="3">
+        <label class="transaction-result-label" for="clear-button">
+          &nbsp;</label
+        >
         <el-button
+          id="clear-button"
           class="transaction-result-clear-button"
-          type="danger"
+          type="info"
           icon="el-icon-refresh-left"
-          @click="clear"
+          @click="clearValue"
         ></el-button>
       </el-col>
     </el-row>
@@ -62,7 +73,7 @@
 </template>
 
 <script>
-import { mapState, mapMutations } from 'vuex'
+import { mapState, mapMutations, mapActions, mapGetters } from 'vuex'
 
 export default {
   data: () => ({
@@ -99,18 +110,22 @@ export default {
     ],
   }),
   computed: {
-    ...mapState({
-      paidValue: (state) => state.sales.paidValue,
-      totalValue: (state) => state.sales.totalValue,
-      remainingValue: (state) => state.sales.remainingValue,
-    }),
+    ...mapGetters('sales', ['remaining']),
+    ...mapState('sales', ['paid', 'total']),
   },
   methods: {
-    ...mapMutations({
-      increase: 'sales/INCREASE_PAID_VALUE',
-      setPaidValue: 'sales/SET_PAID_VALUE',
-      clear: 'sales/CLEAR_VALUE',
+    ...mapMutations('sales', {
+      increase: 'INCREASE_PAID',
+      setPaid: 'SET_PAID',
     }),
+    ...mapActions('sales', ['clearValue']),
+    setRemainingColor() {
+      return this.remaining < 0
+        ? 'color-danger'
+        : this.remaining === 0
+        ? ''
+        : 'color-success'
+    },
   },
 }
 </script>
@@ -119,6 +134,15 @@ export default {
 .transaction-result-inputs input {
   text-align: center;
   font-size: 32px;
+  font-weight: 700;
+}
+
+.transaction-result-label {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--secondary-text-color);
 }
 
 .transaction-result-amount-button-container {
@@ -133,6 +157,14 @@ export default {
   width: 100%;
   text-align: center;
   padding: 10px 0;
+}
+
+.color-danger input {
+  color: var(--danger-color);
+}
+
+.color-success input {
+  color: var(--success-color);
 }
 
 .transaction-result-button {
