@@ -8,7 +8,7 @@ export const mutations = {
     state.paid = Number(state.paid) + payload
   },
   SET_PAID(state, payload) {
-    state.paid = Number(payload)
+    state.paid = payload
   },
 }
 
