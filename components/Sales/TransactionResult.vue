@@ -7,12 +7,10 @@
           id="paid"
           :value="paid"
           class="el-input--large"
-          placeholder=""
           min="0"
           type="number"
           @input="setPaid"
-        >
-        </el-input>
+        ></el-input>
       </el-col>
       <el-col :xs="8" :sm="8" :md="7">
         <label class="transaction-result-label" for="total">Tutar</label>
@@ -20,7 +18,6 @@
           id="total"
           :value="total"
           class="el-input--large"
-          placeholder=""
           min="0"
           type="number"
         />
@@ -31,14 +28,13 @@
           id="remaining"
           :value="remaining"
           :class="`el-input--large ${setRemainingColor()}`"
-          placeholder=""
           min="0"
           type="number"
         />
       </el-col>
       <el-col class="hidden-sm-and-down" :span="3">
-        <label class="transaction-result-label" for="clear-button">
-          &nbsp;</label
+        <label class="transaction-result-label" for="clear-button"
+          >&nbsp;</label
         >
         <el-button
           id="clear-button"
@@ -145,12 +141,9 @@ export default {
   color: var(--secondary-text-color);
 }
 
-.transaction-result-amount-button-container {
-  margin-top: 10px;
-}
-
+.transaction-result-amount-button-container,
 .transaction-result-button-container {
-  margin-top: 20px;
+  margin-top: 10px;
 }
 
 .transaction-result-amount-button {
