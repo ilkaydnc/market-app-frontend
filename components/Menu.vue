@@ -5,6 +5,7 @@
     "
     @mouseenter="toggle = true"
     @mouseleave="toggle = false"
+    @click="toggle = false"
   >
     <div class="menu-header">
       <nuxt-link to="/profile">
@@ -25,7 +26,6 @@
         v-for="(item, index) in menu_1"
         :key="index"
         :to="'/' + item.link"
-        @click="toggle = false"
       >
         <li class="menu-item">
           <i :class="item.icon"></i>
@@ -83,7 +83,7 @@ export default {
         link: 'companies',
       },
       {
-        icon: 'el-icon-data-line',
+        icon: 'el-icon-s-data',
         title: 'İstatistikler',
         link: 'statistics',
       },
@@ -129,7 +129,7 @@ export default {
   justify-content: space-between;
   width: 64px;
   height: 100vh;
-  padding: 16px 0;
+  padding: 8px 0;
   background-color: var(--primary-color);
   transition: width 0.4s cubic-bezier(0.22, 0.61, 0.36, 1);
   overflow: hidden;
