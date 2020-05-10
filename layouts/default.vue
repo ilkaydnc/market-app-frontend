@@ -1,7 +1,9 @@
 <template>
   <div class="app-wrapper">
     <Menu />
-    <nuxt />
+    <transition name="page">
+      <nuxt />
+    </transition>
   </div>
 </template>
 
@@ -74,6 +76,20 @@ button {
 .container {
   flex: 1;
   padding: 10px;
+}
+
+.page-enter-active,
+.page-leave-active {
+  transition: opacity 0.3s, transform 0.2s;
+}
+.page-enter {
+  opacity: 0;
+  transform: scale(0.95);
+}
+
+.page-leave-to {
+  opacity: 0;
+  transform: scale(0.95);
 }
 
 @media (min-width: 768px) {
