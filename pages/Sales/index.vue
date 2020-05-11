@@ -10,8 +10,6 @@
 </template>
 
 <script>
-import 'element-ui/lib/theme-chalk/display.css'
-
 import AddProductField from '@/components/Sales/AddProductField'
 import TransactionResult from '@/components/Sales/TransactionResult'
 
@@ -46,10 +44,22 @@ export default {
 .sales-left-side {
   margin-bottom: 10px;
 }
+
+.sales-rigth-side {
+  display: none;
+}
+
+.box-card {
+  margin-bottom: 10px;
+}
+
 @media (min-width: 768px) {
 }
 
 @media (min-width: 992px) {
+  .sales-rigth-side {
+    display: flex;
+  }
 }
 
 @media (min-width: 1200px) {
