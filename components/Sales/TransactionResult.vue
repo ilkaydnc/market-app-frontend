@@ -54,16 +54,17 @@
           >
         </el-col>
       </el-row>
-      <el-row class="transaction-result-button-container" :gutter="10">
-        <el-col v-for="result in resultButtons" :key="result.title" :span="6">
-          <el-button
-            class="transaction-result-button"
-            :type="result.type"
-            @click="result.submit"
-            >{{ result.title }}</el-button
-          >
-        </el-col>
-      </el-row>
+      <el-button-group class="transaction-result-button-container">
+        <el-button
+          v-for="result in resultButtons"
+          :key="result.title"
+          class="transaction-result-button"
+          :type="result.type"
+          :loading="result.loading"
+          @click="clickResult(result.id)"
+          >{{ result.title }}</el-button
+        >
+      </el-button-group>
     </div>
   </el-card>
 </template>
@@ -76,34 +77,31 @@ export default {
     amountValues: [5, 10, 20, 50, 100, 200],
     resultButtons: [
       {
+        id: 1,
         title: 'Satış',
         type: 'success',
-        submit: () => {
-          // code here
-        },
+        loading: false,
       },
       {
+        id: 2,
         title: 'Pos',
         type: 'primary',
-        submit: () => {
-          // code here
-        },
+        loading: false,
       },
       {
+        id: 3,
         title: 'Veresiye',
         type: 'warning',
-        submit: () => {
-          // code here
-        },
+        loading: false,
       },
       {
+        id: 4,
         title: 'Parçalı',
         type: 'danger',
-        submit: () => {
-          // code here
-        },
+        loading: false,
       },
     ],
+    loading: true,
   }),
   computed: {
     ...mapGetters('sales', ['remaining']),
@@ -116,6 +114,17 @@ export default {
     }),
     clearValue() {
       this.$store.dispatch('sales/clearValue')
+    },
+    clickResult(id) {
+      this.$nextTick(() => {
+        this.$nuxt.$loading.start()
+        this.resultButtons.find((item) => item.id === id).loading = true
+
+        setTimeout(() => {
+          this.$nuxt.$loading.finish()
+          this.resultButtons.find((item) => item.id === id).loading = false
+        }, 3000)
+      })
     },
     setRemainingColor() {
       return this.remaining < 0
@@ -143,8 +152,14 @@ export default {
   color: var(--secondary-text-color);
 }
 
-.transaction-result-amount-button-container,
+.transaction-result-amount-button-container {
+  display: none;
+  margin-top: 10px;
+}
+
 .transaction-result-button-container {
+  display: flex;
+  flex-direction: row;
   margin-top: 10px;
 }
 
@@ -177,5 +192,11 @@ export default {
   text-align: center;
   padding: 10px 0;
   font-size: 24px !important;
+}
+
+@media (min-width: 992px) {
+  .transaction-result-amount-button-container {
+    display: block;
+  }
 }
 </style>
