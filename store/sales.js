@@ -4,10 +4,10 @@ export const state = () => ({
 })
 
 export const mutations = {
-  INCREASE_PAID(state, payload) {
+  INCREASE_PAID: (state, payload) => {
     state.paid = Number(state.paid) + payload
   },
-  SET_PAID(state, payload) {
+  SET_PAID: (state, payload) => {
     state.paid = payload
   },
 }
