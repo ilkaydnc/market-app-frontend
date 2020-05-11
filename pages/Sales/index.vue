@@ -1,14 +1,10 @@
 <template>
   <el-row :gutter="10" class="container">
     <el-col :sm="24" :md="14" :lg="14" :xl="16" class="sales-left-side">
-      <el-card class="box-card">
-        <AddProductField />
-      </el-card>
+      <AddProductField />
     </el-col>
     <el-col :sm="24" :md="10" :lg="10" :xl="8" class="sales-rigth-side">
-      <el-card class="box-card">
-        <TransactionResult />
-      </el-card>
+      <TransactionResult />
     </el-col>
   </el-row>
 </template>
@@ -43,8 +39,8 @@ export default {
 }
 
 .el-input--large input {
-  height: 64px;
-  line-height: 64px;
+  height: 56px;
+  line-height: 56px;
 }
 
 .sales-left-side {

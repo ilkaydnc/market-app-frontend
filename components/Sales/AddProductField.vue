@@ -1,35 +1,52 @@
 <template>
-  <div class="sales-barcode">
-    <div class="sales-barcode-input">
-      <el-input
-        v-model="salesBarcodeValue"
-        class="el-input--large"
-        placeholder="Ürün Barkodu Giriniz"
-        min="0"
-        type="number"
-      >
-      </el-input>
-    </div>
-    <div class="sales-barcode-buttons">
-      <div class="sales-barcode-button">
-        <el-button type="success" icon="el-icon-search">
-          <span class="sales-barcode-button-content">Ürün Ara</span>
-        </el-button>
+  <el-card class="box-card">
+    <div class="sales-barcode">
+      <div class="sales-barcode-input">
+        <label class="large-input-label" for="barcode">Ürün Barkodu</label>
+        <el-input
+          id="barcode"
+          v-model="salesBarcodeValue"
+          class="el-input--large"
+          min="0"
+          type="number"
+        >
+        </el-input>
       </div>
-      <div class="sales-barcode-button">
-        <el-button type="primary" icon="el-icon-view">
-          <span class="sales-barcode-button-content">Fiyat Gör</span>
-        </el-button>
-      </div>
-      <!-- <div class="sales-barcode-button">
+      <div class="sales-barcode-buttons">
+        <div class="sales-barcode-button">
+          <label class="large-input-label" for="sales-search-product"
+            >&nbsp;</label
+          >
+          <el-button
+            id="sales-search-product"
+            type="success"
+            icon="el-icon-search"
+          >
+            <span class="sales-barcode-button-content">Ürün Ara</span>
+          </el-button>
+        </div>
+        <div class="sales-barcode-button">
+          <label class="large-input-label" for="sales-get-product-info"
+            >&nbsp;</label
+          >
+          <el-button
+            id="sales-get-product-info"
+            type="primary"
+            icon="el-icon-view"
+          >
+            <span class="sales-barcode-button-content">Fiyat Gör</span>
+          </el-button>
+        </div>
+        <!-- <div class="sales-barcode-button">
         <el-button type="warning" icon="el-icon-printer">
           <span class="sales-barcode-button-content"
             >Fişi Yazdır</span
           ></el-button
         >
       </div> -->
+      </div>
     </div>
-  </div>
+  </el-card>
 </template>
 <script>
 export default {
@@ -53,6 +70,11 @@ export default {
   margin-bottom: 10px;
 }
 
+.sales-barcode-input input {
+  font-size: 32px;
+  font-weight: 700;
+}
+
 .sales-barcode-buttons {
   display: flex;
   flex-direction: row;
@@ -61,12 +83,17 @@ export default {
 .sales-barcode-button * {
   font-size: 16px;
 }
+
 .sales-barcode-button {
   margin-left: 0;
 }
 
+.sales-barcode-button label {
+  display: none;
+}
+
 .sales-barcode-button button {
-  height: 64px;
+  height: 56px;
 }
 
 @media (min-width: 768px) {
@@ -83,6 +110,10 @@ export default {
 
   .sales-barcode-button {
     margin-left: 10px;
+  }
+
+  .sales-barcode-button label {
+    display: block;
   }
 }
 

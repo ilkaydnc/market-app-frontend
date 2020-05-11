@@ -1,75 +1,75 @@
 <template>
-  <div class="transaction-result">
-    <el-row class="transaction-result-inputs" :gutter="10">
-      <el-col :xs="8" :sm="8" :md="7">
-        <label class="transaction-result-label" for="paid">Ödenen</label>
-        <el-input
-          id="paid"
-          :value="paid"
-          class="el-input--large"
-          min="0"
-          type="number"
-          @input="setPaid"
-        ></el-input>
-      </el-col>
-      <el-col :xs="8" :sm="8" :md="7">
-        <label class="transaction-result-label" for="total">Tutar</label>
-        <el-input
-          id="total"
-          :value="total"
-          class="el-input--large"
-          min="0"
-          type="number"
-        />
-      </el-col>
-      <el-col :xs="8" :sm="8" :md="7">
-        <label class="transaction-result-label" for="remaining">Kalan</label>
-        <el-input
-          id="remaining"
-          :value="remaining"
-          :class="`el-input--large ${setRemainingColor()}`"
-          min="0"
-          type="number"
-        />
-      </el-col>
-      <el-col class="hidden-sm-and-down" :span="3">
-        <label class="transaction-result-label" for="clear-button"
-          >&nbsp;</label
-        >
-        <el-button
-          id="clear-button"
-          class="transaction-result-clear-button"
-          type="info"
-          icon="el-icon-refresh-left"
-          @click="clearValue"
-        ></el-button>
-      </el-col>
-    </el-row>
-    <el-row class="transaction-result-amount-button-container" :gutter="10">
-      <el-col v-for="amount in amountValues" :key="amount" :span="4">
-        <el-button
-          class="transaction-result-amount-button"
-          type="primary"
-          @click="increase(amount)"
-          >{{ amount }}</el-button
-        >
-      </el-col>
-    </el-row>
-    <el-row class="transaction-result-button-container" :gutter="10">
-      <el-col v-for="result in resultButtons" :key="result.title" :span="6">
-        <el-button
-          class="transaction-result-button"
-          :type="result.type"
-          @click="result.submit"
-          >{{ result.title }}</el-button
-        >
-      </el-col>
-    </el-row>
-  </div>
+  <el-card class="box-card">
+    <div class="transaction-result">
+      <el-row class="transaction-result-inputs" :gutter="10">
+        <el-col :xs="8" :sm="8" :md="7">
+          <label class="large-input-label" for="paid">Ödenen</label>
+          <el-input
+            id="paid"
+            :value="paid"
+            class="el-input--large"
+            min="0"
+            type="number"
+            @input="setPaid"
+          ></el-input>
+        </el-col>
+        <el-col :xs="8" :sm="8" :md="7">
+          <label class="large-input-label" for="total">Tutar</label>
+          <el-input
+            id="total"
+            :value="total"
+            class="el-input--large"
+            min="0"
+            type="number"
+          />
+        </el-col>
+        <el-col :xs="8" :sm="8" :md="7">
+          <label class="large-input-label" for="remaining">Kalan</label>
+          <el-input
+            id="remaining"
+            :value="remaining"
+            :class="`el-input--large ${setRemainingColor()}`"
+            min="0"
+            type="number"
+          />
+        </el-col>
+        <el-col class="hidden-sm-and-down" :span="3">
+          <label class="large-input-label" for="clear-button">&nbsp;</label>
+          <el-button
+            id="clear-button"
+            class="transaction-result-clear-button"
+            type="info"
+            icon="el-icon-refresh-left"
+            @click="clearValue"
+          ></el-button>
+        </el-col>
+      </el-row>
+      <el-row class="transaction-result-amount-button-container" :gutter="10">
+        <el-col v-for="amount in amountValues" :key="amount" :span="4">
+          <el-button
+            class="transaction-result-amount-button"
+            type="primary"
+            @click="increase(amount)"
+            >{{ amount }}</el-button
+          >
+        </el-col>
+      </el-row>
+      <el-row class="transaction-result-button-container" :gutter="10">
+        <el-col v-for="result in resultButtons" :key="result.title" :span="6">
+          <el-button
+            class="transaction-result-button"
+            :type="result.type"
+            @click="result.submit"
+            >{{ result.title }}</el-button
+          >
+        </el-col>
+      </el-row>
+    </div>
+  </el-card>
 </template>
 
 <script>
-import { mapState, mapMutations, mapActions, mapGetters } from 'vuex'
+import { mapState, mapMutations, mapGetters } from 'vuex'
 
 export default {
   data: () => ({
@@ -114,7 +114,9 @@ export default {
       increase: 'INCREASE_PAID',
       setPaid: 'SET_PAID',
     }),
-    ...mapActions('sales', ['clearValue']),
+    clearValue() {
+      this.$store.dispatch('sales/clearValue')
+    },
     setRemainingColor() {
       return this.remaining < 0
         ? 'color-danger'
@@ -133,10 +135,10 @@ export default {
   font-weight: 700;
 }
 
-.transaction-result-label {
+.large-input-label {
   display: block;
   margin-bottom: 4px;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 500;
   color: var(--secondary-text-color);
 }
@@ -149,7 +151,7 @@ export default {
 .transaction-result-amount-button {
   width: 100%;
   text-align: center;
-  padding: 10px 0;
+  padding: 8px 0;
 }
 
 .color-danger input {
@@ -162,7 +164,7 @@ export default {
 
 .transaction-result-button {
   width: 100%;
-  height: 64px;
+  height: 56px;
   font-size: 18px !important;
   font-weight: 500 !important;
   text-align: center;
@@ -170,7 +172,7 @@ export default {
 }
 
 .transaction-result-clear-button {
-  height: 64px;
+  height: 56px;
   width: 100%;
   text-align: center;
   padding: 10px 0;
