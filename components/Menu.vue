@@ -1,8 +1,6 @@
 <template>
   <div
-    :class="
-      toggle ? 'main-menu open hidden-xs-only' : 'main-menu hidden-xs-only'
-    "
+    :class="toggle ? 'main-menu open' : 'main-menu'"
     @mouseenter="toggle = true"
     @mouseleave="toggle = false"
     @click="toggle = false"
@@ -121,10 +119,10 @@ export default {
 
 <style>
 .main-menu {
+  display: none;
   position: absolute;
   top: 0;
   left: 0;
-  display: flex;
   flex-direction: column;
   justify-content: space-between;
   width: 64px;
@@ -236,5 +234,11 @@ export default {
 
 .bottom-menu-container a:last-child li i {
   transform: rotate(90deg);
+}
+
+@media (min-width: 992px) {
+  .main-menu {
+    display: flex;
+  }
 }
 </style>
