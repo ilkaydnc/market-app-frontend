@@ -21,10 +21,16 @@ export const mutations = {
   INCREASE_CART_ITEM_COUNT: (state, payload) => {
     const index = state.cart.findIndex((item) => item.barcode === payload)
     state.cart[index].count += 1
+    state.cart[index].total =
+      state.cart[index].selling * state.cart[index].count
   },
   DECREASE_CART_ITEM_COUNT: (state, payload) => {
     const index = state.cart.findIndex((item) => item.barcode === payload)
-    state.cart[index].count -= 1
+    if (state.cart[index].count) {
+      state.cart[index].count -= 1
+      state.cart[index].total =
+        state.cart[index].selling * state.cart[index].count
+    }
   },
 }
 
