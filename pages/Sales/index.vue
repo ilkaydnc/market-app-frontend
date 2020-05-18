@@ -2,9 +2,11 @@
   <el-row :gutter="10" class="container">
     <el-col :sm="24" :md="14" :lg="14" :xl="16" class="sales-left-side">
       <AddProductField />
+      <Cart />
     </el-col>
     <el-col :sm="24" :md="10" :lg="10" :xl="8" class="sales-rigth-side">
       <TransactionResult />
+      <ProductShortcuts />
     </el-col>
   </el-row>
 </template>
@@ -12,12 +14,16 @@
 <script>
 import AddProductField from '@/components/Sales/AddProductField'
 import TransactionResult from '@/components/Sales/TransactionResult'
+import ProductShortcuts from '@/components/Sales/ProductShortcuts'
+import Cart from '@/components/Sales/Cart'
 
 export default {
   name: 'Sales',
   components: {
     AddProductField,
     TransactionResult,
+    ProductShortcuts,
+    Cart,
   },
 }
 </script>
@@ -41,12 +47,24 @@ export default {
   line-height: 56px;
 }
 
+.large-input-label {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--secondary-text-color);
+}
+
 .sales-left-side {
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
   margin-bottom: 10px;
 }
 
 .sales-rigth-side {
   display: none;
+  flex-direction: column;
 }
 
 .box-card {

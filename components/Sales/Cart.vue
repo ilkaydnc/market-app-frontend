@@ -1,0 +1,129 @@
+<template>
+  <el-card class="cart box-card">
+    <div class="top-buttons">
+      <div class="list-info">
+        <span class="list-info-text"
+          ><span class="list-info-text-count">{{ tableData.length }}</span> ürün
+          eklendi.</span
+        >
+      </div>
+      <div>
+        <!-- <el-button type="info" plain icon="el-icon-printer" size="medium"
+          >Listeyi Yazdır</el-button
+        > -->
+        <el-button type="danger" plain icon="el-icon-delete" size="medium"
+          >Listeyi Temizle</el-button
+        >
+      </div>
+    </div>
+    <div>
+      <el-table
+        ref="multipleTable"
+        :data="tableData"
+        height="50vh"
+        empty-text="Ürün Eklenmedi!"
+        stripe
+        :row-class-name="tableRowClassName"
+        @selection-change="handleSelectionChange"
+      >
+        <el-table-column type="selection" width="55"> </el-table-column>
+        <el-table-column property="barcode" label="Barkod" width="120">
+        </el-table-column>
+        <el-table-column property="name" label="İsim" sortable>
+        </el-table-column>
+        <el-table-column property="selling" label="Satış" width="120">
+        </el-table-column>
+        <el-table-column property="count" label="Miktar" width="120">
+        </el-table-column>
+        <el-table-column property="total" label="Tutar" width="120">
+        </el-table-column>
+        <el-table-column label="Aksiyon" width="80" align="center">
+          <el-button type="danger" size="mini" plain>
+            Sil
+          </el-button>
+        </el-table-column>
+      </el-table>
+    </div>
+  </el-card>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      multipleSelection: [],
+    }
+  },
+  computed: {
+    tableData() {
+      return this.$store.state.sales.cart
+    },
+  },
+  methods: {
+    tableRowClassName({ row, rowIndex }) {
+      if (row.count === 0) {
+        return 'danger-row'
+      }
+      return ''
+    },
+    toggleSelection(rows) {
+      if (rows) {
+        rows.forEach((row) => {
+          this.$refs.multipleTable.toggleRowSelection(row)
+        })
+      } else {
+        this.$refs.multipleTable.clearSelection()
+      }
+    },
+    handleSelectionChange(val) {
+      this.multipleSelection = val
+    },
+  },
+}
+</script>
+
+<style lang="scss">
+.cart {
+  .top-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+
+  .top-buttons {
+    .list-info {
+      display: flex;
+      align-items: center;
+      height: 37px;
+    }
+
+    .list-info-text {
+      font-size: 15px;
+      color: var(--secondary-text-color);
+    }
+
+    .list-info-text-count {
+      color: var(--secondary-text-color);
+      font-weight: 700;
+    }
+  }
+
+  .el-table {
+    border: 1px solid var(--lighter-border-color);
+    .el-table__header-wrapper {
+      position: sticky;
+      top: 0;
+      left: 0;
+      background-color: var(--lighter-border-color) !important;
+    }
+
+    .danger-row {
+      color: var(--placeholder-text-color) !important;
+    }
+
+    .el-table__body {
+      overflow-y: auto;
+    }
+  }
+}
+</style>
