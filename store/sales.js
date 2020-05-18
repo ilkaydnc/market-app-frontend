@@ -24,6 +24,12 @@ export const mutations = {
     )
     state.cart[index].count += 1
   },
+  DECREASE_CART_ITEM_COUNT: (state, payload) => {
+    const index = state.cart.findIndex(
+      (item) => item.barcode === payload.barcode
+    )
+    state.cart[index].count -= 1
+  },
 }
 
 export const getters = {
