@@ -9,6 +9,7 @@
 
 <script>
 import Menu from '../components/Menu'
+
 export default {
   components: {
     Menu,
@@ -43,7 +44,6 @@ html {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   box-sizing: border-box;
-  overflow: hidden;
   background-color: var(--extra-light-border-color);
 }
 
@@ -51,7 +51,6 @@ button {
   font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
     'Helvetica Neue', Arial, sans-serif !important;
   font-weight: 300 !important;
-  font-size: 16px !important;
 }
 
 *,
@@ -70,6 +69,8 @@ button {
   flex-direction: row;
   width: 100%;
   height: 100vh;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .container {
@@ -87,13 +88,17 @@ button {
   transform: scale(0.95);
 }
 
+.el-tooltip__popper {
+  transition: all 0s !important;
+}
+
 @media (min-width: 768px) {
-  .container {
-    margin-left: 64px !important;
-  }
 }
 
 @media (min-width: 992px) {
+  .container {
+    margin-left: 64px !important;
+  }
 }
 
 @media (min-width: 1200px) {
