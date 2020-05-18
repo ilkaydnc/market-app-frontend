@@ -1,71 +1,69 @@
 <template>
-  <el-card class="box-card">
-    <div class="transaction-result">
-      <el-row class="transaction-result-inputs" :gutter="10">
-        <el-col :xs="8" :sm="8" :md="7">
-          <label class="large-input-label" for="paid">Ödenen</label>
-          <el-input
-            id="paid"
-            :value="paid"
-            class="el-input--large"
-            min="0"
-            type="number"
-            @input="setPaid"
-          ></el-input>
-        </el-col>
-        <el-col :xs="8" :sm="8" :md="7">
-          <label class="large-input-label" for="total">Tutar</label>
-          <el-input
-            id="total"
-            :value="total"
-            class="el-input--large"
-            min="0"
-            type="number"
-          />
-        </el-col>
-        <el-col :xs="8" :sm="8" :md="7">
-          <label class="large-input-label" for="remaining">Kalan</label>
-          <el-input
-            id="remaining"
-            :value="remaining"
-            :class="`el-input--large ${setRemainingColor()}`"
-            min="0"
-            type="number"
-          />
-        </el-col>
-        <el-col class="hidden-sm-and-down" :span="3">
-          <label class="large-input-label" for="clear-button">&nbsp;</label>
-          <el-button
-            id="clear-button"
-            class="transaction-result-clear-button"
-            type="info"
-            icon="el-icon-refresh-left"
-            @click="clearValue"
-          ></el-button>
-        </el-col>
-      </el-row>
-      <el-row class="transaction-result-amount-button-container" :gutter="10">
-        <el-col v-for="amount in amountValues" :key="amount" :span="4">
-          <el-button
-            class="transaction-result-amount-button"
-            type="primary"
-            @click="increase(amount)"
-            >{{ amount }}</el-button
-          >
-        </el-col>
-      </el-row>
-      <el-button-group class="transaction-result-button-container">
+  <el-card class="transaction-result box-card">
+    <el-row class="inputs" :gutter="10">
+      <el-col :xs="8" :sm="8" :md="7">
+        <label class="large-input-label" for="paid">Ödenen</label>
+        <el-input
+          id="paid"
+          :value="paid"
+          class="el-input--large"
+          min="0"
+          type="number"
+          @input="setPaid"
+        ></el-input>
+      </el-col>
+      <el-col :xs="8" :sm="8" :md="7">
+        <label class="large-input-label" for="total">Tutar</label>
+        <el-input
+          id="total"
+          :value="total"
+          class="el-input--large"
+          min="0"
+          type="number"
+        />
+      </el-col>
+      <el-col :xs="8" :sm="8" :md="7">
+        <label class="large-input-label" for="remaining">Kalan</label>
+        <el-input
+          id="remaining"
+          :value="remaining"
+          :class="`el-input--large ${setRemainingColor()}`"
+          min="0"
+          type="number"
+        />
+      </el-col>
+      <el-col class="hidden-sm-and-down" :span="3">
+        <label class="large-input-label" for="clear-button">&nbsp;</label>
         <el-button
-          v-for="result in resultButtons"
-          :key="result.title"
-          class="transaction-result-button"
-          :type="result.type"
-          :loading="result.loading"
-          @click="clickResult(result.id)"
-          >{{ result.title }}</el-button
+          id="clear-button"
+          class="clear-button"
+          type="info"
+          icon="el-icon-refresh-left"
+          @click="clearValue"
+        ></el-button>
+      </el-col>
+    </el-row>
+    <el-row class="amount-button-container" :gutter="10">
+      <el-col v-for="amount in amountValues" :key="amount" :span="4">
+        <el-button
+          class="amount-button"
+          type="primary"
+          @click="increase(amount)"
+          >{{ amount }}</el-button
         >
-      </el-button-group>
-    </div>
+      </el-col>
+    </el-row>
+    <el-button-group class="button-container">
+      <el-button
+        v-for="result in resultButtons"
+        :key="result.title"
+        class="button"
+        :type="result.type"
+        :loading="result.loading"
+        @click="clickResult(result.id)"
+        >{{ result.title }}</el-button
+      >
+    </el-button-group>
   </el-card>
 </template>
 
@@ -73,6 +71,7 @@
 import { mapState, mapMutations, mapGetters } from 'vuex'
 
 export default {
+  name: 'TransactionResult',
   data: () => ({
     amountValues: [5, 10, 20, 50, 100, 200],
     resultButtons: [
@@ -92,12 +91,6 @@ export default {
         id: 3,
         title: 'Veresiye',
         type: 'warning',
-        loading: false,
-      },
-      {
-        id: 4,
-        title: 'Parçalı',
-        type: 'danger',
         loading: false,
       },
     ],
@@ -137,66 +130,74 @@ export default {
 }
 </script>
 
-<style>
-.transaction-result-inputs input {
-  text-align: center;
-  font-size: 32px;
-  font-weight: 700;
-}
+<style lang="scss">
+.transaction-result {
+  .inputs {
+    input {
+      text-align: center;
+      font-size: 32px;
+      font-weight: 700;
+    }
+  }
 
-.large-input-label {
-  display: block;
-  margin-bottom: 4px;
-  font-size: 16px;
-  font-weight: 500;
-  color: var(--secondary-text-color);
-}
-
-.transaction-result-amount-button-container {
-  display: none;
-  margin-top: 10px;
-}
-
-.transaction-result-button-container {
-  display: flex;
-  flex-direction: row;
-  margin-top: 10px;
-}
-
-.transaction-result-amount-button {
-  width: 100%;
-  text-align: center;
-  padding: 8px 0;
-}
-
-.color-danger input {
-  color: var(--danger-color);
-}
-
-.color-success input {
-  color: var(--success-color);
-}
-
-.transaction-result-button {
-  width: 100%;
-  height: 56px;
-  font-size: 18px !important;
-  font-weight: 500 !important;
-  text-align: center;
-  padding: 10px 0;
-}
-
-.transaction-result-clear-button {
-  height: 56px;
-  width: 100%;
-  text-align: center;
-  padding: 10px 0;
-  font-size: 24px !important;
-}
-
-@media (min-width: 992px) {
-  .transaction-result-amount-button-container {
+  .large-input-label {
     display: block;
+    margin-bottom: 4px;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--secondary-text-color);
+  }
+
+  .amount-button-container {
+    display: none;
+    margin-top: 10px;
+  }
+
+  .button-container {
+    display: flex;
+    flex-direction: row;
+    margin-top: 10px;
+  }
+
+  .amount-button {
+    width: 100%;
+    text-align: center;
+    padding: 8px 0;
+  }
+
+  .color-danger {
+    input {
+      color: var(--danger-color);
+    }
+  }
+
+  .color-success {
+    input {
+      color: var(--success-color);
+    }
+  }
+
+  .button {
+    width: 100%;
+    height: 56px;
+    font-size: 18px !important;
+    font-weight: 500 !important;
+    text-align: center;
+    padding: 10px 0;
+  }
+
+  .clear-button {
+    height: 56px;
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 24px !important;
+  }
+
+  @media (min-width: 992px) {
+    .amount-button-container {
+      display: block;
+    }
   }
 }
 </style>
