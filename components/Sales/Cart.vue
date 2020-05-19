@@ -113,9 +113,10 @@ export default {
       })
         .then(() => {
           this.$store.commit('sales/CLEAR_CART')
-          this.$message({
+          this.$notify({
             type: 'success',
             message: 'Sepet Temizlendi!',
+            position: 'bottom-right',
           })
         })
         .catch(() => {})
@@ -124,10 +125,10 @@ export default {
       this.multipleSelection.map((item) => {
         this.$store.commit('sales/DELETE_CART_ITEM', item.barcode)
       })
-      this.$message({
+      this.$notify({
         type: 'success',
         message: 'Seçili ürünler silindi!',
-        position: 'bottom',
+        position: 'bottom-right',
       })
     },
   },
