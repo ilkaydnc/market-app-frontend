@@ -60,7 +60,7 @@
               size="small"
               controls-position="right"
               :min="0"
-              :step="0.25"
+              :step="1.0"
               @change="
                 handleChange($event, scope.row, 'CHANGE_CART_ITEM_SELLING')
               "
