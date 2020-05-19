@@ -18,19 +18,21 @@ export const mutations = {
   ADD_TO_CART: (state, payload) => {
     state.cart = [...state.cart, payload]
   },
-  INCREASE_CART_ITEM_COUNT: (state, payload) => {
-    const index = state.cart.findIndex((item) => item.barcode === payload)
+  CHANGE_CART_ITEM_COUNT: (state, payload) => {
+    const index = state.cart.findIndex(
+      (item) => item.barcode === payload.barcode
+    )
     const selected = state.cart[index]
-    selected.count += 1
+    selected.count = Number(payload.newValue)
     selected.total = selected.selling * selected.count
   },
-  DECREASE_CART_ITEM_COUNT: (state, payload) => {
-    const index = state.cart.findIndex((item) => item.barcode === payload)
+  CHANGE_CART_ITEM_SELLING: (state, payload) => {
+    const index = state.cart.findIndex(
+      (item) => item.barcode === payload.barcode
+    )
     const selected = state.cart[index]
-    if (selected.count) {
-      selected.count -= 1
-      selected.total = selected.selling * selected.count
-    }
+    selected.selling = Number(payload.newValue)
+    selected.total = selected.selling * selected.count
   },
   DELETE_CART_ITEM: (state, payload) => {
     const index = state.cart.findIndex((item) => item.barcode === payload)
@@ -87,11 +89,14 @@ export const actions = {
       count: 1,
       total: product.selling,
     }
-    const tempState = state.cart.filter(
+    const index = state.cart.findIndex(
       (item) => item.barcode === payload.barcode
     )
-    if (tempState.length) {
-      commit('INCREASE_CART_ITEM_COUNT', payload.barcode)
+    if (index >= 0) {
+      commit('CHANGE_CART_ITEM_COUNT', {
+        ...payload,
+        newValue: payload.count + 1,
+      })
     } else {
       commit('ADD_TO_CART', payload)
     }

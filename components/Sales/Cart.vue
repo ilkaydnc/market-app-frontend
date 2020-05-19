@@ -47,13 +47,56 @@
         </el-table-column>
         <el-table-column property="name" label="İsim" sortable>
         </el-table-column>
-        <el-table-column property="selling" label="Satış" width="120">
+        <el-table-column
+          property="selling"
+          label="Satış"
+          width="120"
+          align="center"
+          header-align="center"
+        >
+          <template slot-scope="scope">
+            <el-input-number
+              :value="scope.row.selling"
+              size="mini"
+              controls-position="right"
+              :min="0"
+              :step="0.25"
+              @change="
+                handleChange($event, scope.row, 'CHANGE_CART_ITEM_SELLING')
+              "
+            ></el-input-number>
+          </template>
         </el-table-column>
-        <el-table-column property="count" label="Miktar" width="120">
+        <el-table-column
+          property="count"
+          label="Miktar"
+          width="120"
+          align="center"
+          header-align="center"
+        >
+          <template slot-scope="scope">
+            <el-input-number
+              :value="scope.row.count"
+              size="mini"
+              controls-position="right"
+              :min="0.0"
+              :step="1.0"
+              @change="
+                handleChange($event, scope.row, 'CHANGE_CART_ITEM_COUNT')
+              "
+            ></el-input-number>
+          </template>
         </el-table-column>
-        <el-table-column property="total" label="Tutar" width="120">
+        <el-table-column
+          property="total"
+          label="Tutar"
+          width="120"
+          align="center"
+          header-align="center"
+        >
+          <template> </template>
         </el-table-column>
-        <el-table-column label="Aksiyon" width="80" align="center">
+        <el-table-column label="İşlem" width="80" align="center">
           <template slot-scope="scope">
             <el-button
               type="danger"
@@ -83,6 +126,9 @@ export default {
     },
   },
   methods: {
+    handleChange(e, row, mutation) {
+      this.$store.commit(`sales/${mutation}`, { ...row, newValue: e })
+    },
     tableRowClassName({ row, rowIndex }) {
       if (row.count === 0) {
         return 'danger-row'
@@ -145,11 +191,9 @@ export default {
   .top-buttons {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     margin-bottom: 10px;
-  }
 
-  .top-buttons {
-    height: 56px;
     .list-info {
       display: flex;
       align-items: center;
@@ -182,6 +226,10 @@ export default {
 
     .el-table__body {
       overflow-y: auto;
+    }
+
+    .el-input-number--mini {
+      width: 100px;
     }
   }
 }
