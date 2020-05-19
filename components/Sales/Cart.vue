@@ -45,7 +45,7 @@
         <el-table-column type="selection" width="55"> </el-table-column>
         <el-table-column property="barcode" label="Barkod" width="120">
         </el-table-column>
-        <el-table-column property="name" label="İsim" sortable>
+        <el-table-column property="label" label="İsim" sortable>
         </el-table-column>
         <el-table-column
           property="selling"
@@ -57,7 +57,7 @@
           <template slot-scope="scope">
             <el-input-number
               :value="scope.row.selling"
-              size="mini"
+              size="small"
               controls-position="right"
               :min="0"
               :step="0.25"
@@ -77,7 +77,7 @@
           <template slot-scope="scope">
             <el-input-number
               :value="scope.row.count"
-              size="mini"
+              size="small"
               controls-position="right"
               :min="0.0"
               :step="1.0"
@@ -94,7 +94,6 @@
           align="center"
           header-align="center"
         >
-          <template> </template>
         </el-table-column>
         <el-table-column label="İşlem" width="80" align="center">
           <template slot-scope="scope">
@@ -228,8 +227,14 @@ export default {
       overflow-y: auto;
     }
 
-    .el-input-number--mini {
-      width: 100px;
+    .el-input-number--small {
+      width: 110px;
+    }
+
+    .el-input__inner {
+      text-align: left;
+      padding-left: 10px;
+      padding-right: 42px;
     }
   }
 }
