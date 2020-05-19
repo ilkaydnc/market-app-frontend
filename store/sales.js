@@ -32,6 +32,13 @@ export const mutations = {
         state.cart[index].selling * state.cart[index].count
     }
   },
+  DELETE_CART_ITEM: (state, payload) => {
+    const index = state.cart.findIndex((item) => item.barcode === payload)
+    state.cart.splice(index, 1)
+  },
+  CLEAR_CART: (state) => {
+    state.cart = []
+  },
 }
 
 export const getters = {
