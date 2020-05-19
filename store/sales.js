@@ -1,3 +1,5 @@
+import data from '@/assets/placeholder_shortcuts'
+
 export const state = () => ({
   paid: 0,
   total: 0,
@@ -23,16 +25,16 @@ export const mutations = {
       (item) => item.barcode === payload.barcode
     )
     const selected = state.cart[index]
-    selected.count = Number(payload.newValue)
-    selected.total = selected.selling * selected.count
+    selected.count = Number(payload.newValue) || 0
+    selected.total = Number((selected.selling * selected.count).toFixed(4))
   },
   CHANGE_CART_ITEM_SELLING: (state, payload) => {
     const index = state.cart.findIndex(
       (item) => item.barcode === payload.barcode
     )
     const selected = state.cart[index]
-    selected.selling = Number(payload.newValue)
-    selected.total = selected.selling * selected.count
+    selected.selling = Number(payload.newValue) || 0
+    selected.total = Number((selected.selling * selected.count).toFixed(4))
   },
   DELETE_CART_ITEM: (state, payload) => {
     const index = state.cart.findIndex((item) => item.barcode === payload)
@@ -46,13 +48,15 @@ export const mutations = {
 
 export const getters = {
   remaining: (state) => {
-    return state.paid > 0 ? state.paid - getters.total(state) : 0
+    return state.paid > 0
+      ? Number((state.paid - getters.total(state)).toFixed(2))
+      : 0
   },
   shortcuts_loading: (state) => {
     return Boolean(!state.tabs.length)
   },
   total: (state) => {
-    return state.cart.reduce((prev, next) => prev + next.total, 0)
+    return state.cart.reduce((prev, next) => prev + next.total, 0).toFixed(2)
   },
 }
 
@@ -61,44 +65,24 @@ export const actions = {
     commit('SET_PAID', 0)
   },
   getTabs({ commit }) {
-    setTimeout(() => {
-      commit('SET_TABS', [
-        {
-          id: 1,
-          label: 'Ana Ürünler',
-          products: [
-            {
-              barcode: 1234123423,
-              name: 'Ekmek',
-              selling: 1.25,
-            },
-            {
-              barcode: 4564565454,
-              name: 'Su',
-              selling: 1.0,
-            },
-          ],
-        },
-      ])
-    }, 500)
+    commit('SET_TABS', data.tabs && data.tabs)
   },
   addToCart({ commit, state }, product) {
     const payload = {
       ...product,
-      label: product.name,
-      count: 1,
       total: product.selling,
     }
     const index = state.cart.findIndex(
-      (item) => item.barcode === payload.barcode
+      (item) => item.barcode === product.barcode
     )
     if (index >= 0) {
       commit('CHANGE_CART_ITEM_COUNT', {
         ...payload,
-        newValue: payload.count + 1,
+        count: state.cart[index].count,
+        newValue: state.cart[index].count + 1,
       })
     } else {
-      commit('ADD_TO_CART', payload)
+      commit('ADD_TO_CART', { ...payload, count: 1 })
     }
   },
 }
