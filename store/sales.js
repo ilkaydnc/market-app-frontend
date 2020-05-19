@@ -38,12 +38,13 @@ export const mutations = {
   },
   CLEAR_CART: (state) => {
     state.cart = []
+    state.paid = 0
   },
 }
 
 export const getters = {
   remaining: (state) => {
-    return state.paid > 0 ? state.paid - state.total : 0
+    return state.paid > 0 ? state.paid - getters.total(state) : 0
   },
   shortcuts_loading: (state) => {
     return Boolean(!state.tabs.length)
