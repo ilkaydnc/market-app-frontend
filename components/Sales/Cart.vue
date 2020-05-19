@@ -103,6 +103,11 @@ export default {
     },
     deleteItem(index, row) {
       this.$store.commit('sales/DELETE_CART_ITEM', row.barcode)
+      this.$notify({
+        type: 'success',
+        message: 'Ürün silindi!',
+        position: 'bottom-right',
+      })
     },
     clearCart() {
       this.$confirm('Sepeti temizlemek istediğine emin misin?', 'Uyarı', {
@@ -115,7 +120,7 @@ export default {
           this.$store.commit('sales/CLEAR_CART')
           this.$notify({
             type: 'success',
-            message: 'Sepet Temizlendi!',
+            message: 'Sepet temizlendi!',
             position: 'bottom-right',
           })
         })
@@ -144,6 +149,7 @@ export default {
   }
 
   .top-buttons {
+    height: 56px;
     .list-info {
       display: flex;
       align-items: center;
