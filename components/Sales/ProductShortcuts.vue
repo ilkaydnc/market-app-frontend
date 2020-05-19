@@ -12,11 +12,11 @@
           :key="product.barcode"
           class="item"
           :open-delay="1000"
-          :content="product.name"
+          :content="product.label"
           placement="top"
         >
           <el-button class="product-box" plain @click="addToCart(product)">
-            <div class="name">{{ product.name }}</div>
+            <div class="name">{{ product.label }}</div>
             <div class="selling">{{ product.selling }}</div>
           </el-button>
         </el-tooltip>
@@ -89,7 +89,7 @@ export default {
 
     .name {
       display: inline-block;
-      max-width: 140px;
+      max-width: 120px;
       width: 100%;
       color: var(--regular-text-color);
       font-weight: 700 !important;
