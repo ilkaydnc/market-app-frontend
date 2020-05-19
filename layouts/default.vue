@@ -92,6 +92,10 @@ button {
   transition: all 0s !important;
 }
 
+.el-notification__content {
+  margin-top: 2px;
+}
+
 @media (min-width: 768px) {
 }
 
