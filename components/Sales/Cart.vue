@@ -11,9 +11,25 @@
         <!-- <el-button type="info" plain icon="el-icon-printer" size="medium"
           >Listeyi Yazdır</el-button
         > -->
-        <el-button type="danger" plain icon="el-icon-delete" size="medium"
-          >Listeyi Temizle</el-button
+        <el-button
+          type="primary"
+          plain
+          size="medium"
+          :disabled="multipleSelection.length ? false : true"
+          @click="deleteSelecteds"
         >
+          Sepeti Temizle
+        </el-button>
+        <el-button
+          type="danger"
+          plain
+          icon="el-icon-delete"
+          size="medium"
+          :disabled="tableData.length ? false : true"
+          @click="clearCart"
+        >
+          Sepeti Temizle
+        </el-button>
       </div>
     </div>
     <div>
@@ -38,9 +54,16 @@
         <el-table-column property="total" label="Tutar" width="120">
         </el-table-column>
         <el-table-column label="Aksiyon" width="80" align="center">
-          <el-button type="danger" size="mini" plain>
-            Sil
-          </el-button>
+          <template slot-scope="scope">
+            <el-button
+              type="danger"
+              size="mini"
+              plain
+              @click="deleteItem(scope.$index, scope.row)"
+            >
+              Sil
+            </el-button>
+          </template>
         </el-table-column>
       </el-table>
     </div>
@@ -77,6 +100,35 @@ export default {
     },
     handleSelectionChange(val) {
       this.multipleSelection = val
+    },
+    deleteItem(index, row) {
+      this.$store.commit('sales/DELETE_CART_ITEM', row.barcode)
+    },
+    clearCart() {
+      this.$confirm('Sepeti temizlemek istediğine emin misin?', 'Uyarı', {
+        confirmButtonText: 'Onayla',
+        confirmButtonClass: 'el-button--danger',
+        cancelButtonText: 'İptal Et',
+        type: 'error',
+      })
+        .then(() => {
+          this.$store.commit('sales/CLEAR_CART')
+          this.$message({
+            type: 'success',
+            message: 'Sepet Temizlendi!',
+          })
+        })
+        .catch(() => {})
+    },
+    deleteSelecteds() {
+      this.multipleSelection.map((item) => {
+        this.$store.commit('sales/DELETE_CART_ITEM', item.barcode)
+      })
+      this.$message({
+        type: 'success',
+        message: 'Seçili ürünler silindi!',
+        position: 'bottom',
+      })
     },
   },
 }
