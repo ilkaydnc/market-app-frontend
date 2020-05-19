@@ -18,7 +18,7 @@
           :disabled="multipleSelection.length ? false : true"
           @click="deleteSelecteds"
         >
-          Sepeti Temizle
+          Seçili Ürünleri Sil
         </el-button>
         <el-button
           type="danger"
