@@ -97,8 +97,8 @@ export default {
     loading: true,
   }),
   computed: {
-    ...mapGetters('sales', ['remaining']),
-    ...mapState('sales', ['paid', 'total']),
+    ...mapGetters('sales', ['remaining', 'total']),
+    ...mapState('sales', ['paid']),
   },
   methods: {
     ...mapMutations('sales', {

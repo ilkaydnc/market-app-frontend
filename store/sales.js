@@ -1,6 +1,6 @@
 export const state = () => ({
   paid: 0,
-  total: 32,
+  total: 0,
   tabs: [],
   cart: [],
 })
@@ -20,16 +20,16 @@ export const mutations = {
   },
   INCREASE_CART_ITEM_COUNT: (state, payload) => {
     const index = state.cart.findIndex((item) => item.barcode === payload)
-    state.cart[index].count += 1
-    state.cart[index].total =
-      state.cart[index].selling * state.cart[index].count
+    const selected = state.cart[index]
+    selected.count += 1
+    selected.total = selected.selling * selected.count
   },
   DECREASE_CART_ITEM_COUNT: (state, payload) => {
     const index = state.cart.findIndex((item) => item.barcode === payload)
-    if (state.cart[index].count) {
-      state.cart[index].count -= 1
-      state.cart[index].total =
-        state.cart[index].selling * state.cart[index].count
+    const selected = state.cart[index]
+    if (selected.count) {
+      selected.count -= 1
+      selected.total = selected.selling * selected.count
     }
   },
   DELETE_CART_ITEM: (state, payload) => {
@@ -47,6 +47,9 @@ export const getters = {
   },
   shortcuts_loading: (state) => {
     return Boolean(!state.tabs.length)
+  },
+  total: (state) => {
+    return state.cart.reduce((prev, next) => prev + next.total, 0)
   },
 }
 
