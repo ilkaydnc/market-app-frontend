@@ -10,7 +10,7 @@
       <div>
         <!-- <el-button type="info" plain icon="el-icon-printer" size="medium"
           >Listeyi Yazdır</el-button
-        > -->
+        > 
         <el-button
           type="primary"
           plain
@@ -19,7 +19,16 @@
           @click="deleteSelecteds"
         >
           Seçili Ürünleri Sil
-        </el-button>
+        </el-button> -->
+        <el-button
+          type="primary"
+          plain
+          size="medium"
+          icon="el-icon-plus"
+          @click="toggleModal(true)"
+        >
+          Özel Ürün Ekle</el-button
+        >
         <el-button
           type="danger"
           plain
@@ -40,13 +49,9 @@
         empty-text="Ürün Eklenmedi!"
         stripe
         :row-class-name="tableRowClassName"
-        @selection-change="handleSelectionChange"
       >
-        <el-table-column type="selection" width="55"> </el-table-column>
-        <el-table-column property="barcode" label="Barkod" width="120">
-        </el-table-column>
-        <el-table-column property="label" label="İsim" sortable>
-        </el-table-column>
+        <!-- <el-table-column type="selection" width="55"> </el-table-column> -->
+        <el-table-column property="label" label="İsim"> </el-table-column>
         <el-table-column
           property="selling"
           label="Satış"
@@ -130,24 +135,11 @@ export default {
     },
     tableRowClassName({ row, rowIndex }) {
       if (row.count === 0) {
-        return 'danger-row'
+        return 'muted-row'
       }
       return ''
     },
-    toggleSelection(rows) {
-      if (rows) {
-        rows.forEach((row) => {
-          this.$refs.multipleTable.toggleRowSelection(row)
-        })
-      } else {
-        this.$refs.multipleTable.clearSelection()
-      }
-    },
-    handleSelectionChange(val) {
-      this.multipleSelection = val
-    },
     deleteItem(index, row) {
-      this.$store.commit('sales/DELETE_CART_ITEM', row.barcode)
       this.$notify({
         type: 'success',
         message: 'Ürün silindi!',
@@ -171,15 +163,8 @@ export default {
         })
         .catch(() => {})
     },
-    deleteSelecteds() {
-      this.multipleSelection.map((item) => {
-        this.$store.commit('sales/DELETE_CART_ITEM', item.barcode)
-      })
-      this.$notify({
-        type: 'success',
-        message: 'Seçili ürünler silindi!',
-        position: 'bottom-right',
-      })
+    toggleModal(isOpen) {
+      this.$store.commit('sales/TOGGLE_MODAL', isOpen)
     },
   },
 }
@@ -219,7 +204,7 @@ export default {
       background-color: var(--lighter-border-color) !important;
     }
 
-    .danger-row {
+    .muted-row {
       color: var(--placeholder-text-color) !important;
     }
 
