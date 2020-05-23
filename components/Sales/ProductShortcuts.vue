@@ -6,6 +6,7 @@
         :key="tab.id"
         class="product-tab-container"
         :label="tab.label"
+        :lazy="true"
       >
         <el-tooltip
           v-for="product in tab.products"
