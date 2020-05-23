@@ -5,6 +5,7 @@ export const state = () => ({
   total: 0,
   tabs: [],
   cart: [],
+  visibleModal: false,
 })
 
 export const mutations = {
@@ -43,6 +44,9 @@ export const mutations = {
   CLEAR_CART: (state) => {
     state.cart = []
     state.paid = 0
+  },
+  TOGGLE_MODAL: (state, payload) => {
+    state.visibleModal = payload
   },
 }
 
