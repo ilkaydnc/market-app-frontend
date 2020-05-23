@@ -3,6 +3,8 @@
     <el-col :sm="24" :md="14" :lg="14" :xl="16" class="sales-left-side">
       <AddProductField />
       <Cart />
+      <AddCustomProduct />
+      <SelectCustomerField />
     </el-col>
     <el-col :sm="24" :md="10" :lg="10" :xl="8" class="sales-rigth-side">
       <TransactionResult />
@@ -16,6 +18,8 @@ import AddProductField from '@/components/Sales/AddProductField'
 import TransactionResult from '@/components/Sales/TransactionResult'
 import ProductShortcuts from '@/components/Sales/ProductShortcuts'
 import Cart from '@/components/Sales/Cart'
+import SelectCustomerField from '@/components/Sales/SelectCustomerField'
+import AddCustomProduct from '@/components/Sales/AddCustomProduct'
 
 export default {
   name: 'Sales',
@@ -24,6 +28,8 @@ export default {
     TransactionResult,
     ProductShortcuts,
     Cart,
+    SelectCustomerField,
+    AddCustomProduct,
   },
 }
 </script>
