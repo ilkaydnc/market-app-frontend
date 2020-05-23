@@ -96,6 +96,10 @@ button {
   margin-top: 2px;
 }
 
+.el-badge__content {
+  border: none;
+}
+
 @media (min-width: 768px) {
 }
 

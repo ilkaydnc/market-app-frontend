@@ -40,7 +40,15 @@
         :to="'/' + item.link"
       >
         <li class="menu-item">
-          <i :class="item.icon"></i>
+          <el-badge
+            v-if="item.title === 'İletişim' && contactNotification"
+            :value="contactNotification"
+            :max="9"
+            class="item"
+          >
+            <i :class="item.icon"></i>
+          </el-badge>
+          <i v-else :class="item.icon"></i>
           <transition name="fade">
             <span v-if="toggle">{{ item.title }}</span>
           </transition>
@@ -54,6 +62,7 @@
 export default {
   data: () => ({
     toggle: false,
+    contactNotification: 1,
     menu_1: [
       {
         icon: 'el-icon-house',
