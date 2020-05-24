@@ -138,7 +138,7 @@ export default {
   height: 100vh;
   padding: 8px 0;
   background-color: var(--primary-color);
-  transition: width 0.4s cubic-bezier(0.22, 0.61, 0.36, 1);
+  transition: width 0.3s cubic-bezier(0.22, 0.61, 0.36, 1);
   overflow: hidden;
   z-index: 10;
 }
@@ -146,7 +146,7 @@ export default {
 .open {
   width: 224px;
   box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.3);
-  transition: width 0.4s cubic-bezier(0.22, 0.61, 0.36, 1);
+  transition: width 0.3s cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
 .menu-header .menu-item {
