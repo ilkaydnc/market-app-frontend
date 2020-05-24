@@ -8,18 +8,6 @@
         >
       </div>
       <div>
-        <!-- <el-button type="info" plain icon="el-icon-printer" size="medium"
-          >Listeyi Yazdır</el-button
-        > 
-        <el-button
-          type="primary"
-          plain
-          size="medium"
-          :disabled="multipleSelection.length ? false : true"
-          @click="deleteSelecteds"
-        >
-          Seçili Ürünleri Sil
-        </el-button> -->
         <el-button
           type="primary"
           plain
@@ -50,7 +38,6 @@
         stripe
         :row-class-name="tableRowClassName"
       >
-        <!-- <el-table-column type="selection" width="55"> </el-table-column> -->
         <el-table-column property="label" label="İsim"> </el-table-column>
         <el-table-column
           property="selling"
@@ -140,6 +127,7 @@ export default {
       return ''
     },
     deleteItem(index, row) {
+      this.$store.commit('sales/DELETE_CART_ITEM', row.barcode)
       this.$notify({
         type: 'success',
         message: 'Ürün silindi!',
